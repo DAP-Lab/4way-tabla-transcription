@@ -8,13 +8,12 @@ with Models Adapted from Automatic Drum Transcription”, in Proc. of the
 
 
 Contents:
-1. Audio examples
+1. Code
+	* A python script to detect and classify strokes in a given audio of tabla playing, using the 1-way models described in Section 3.1.2 of the paper trained on augmented data using the best augmentation method (see Table 7 in paper).
+	* Python scripts with implementations of different augmentation methods as described in Section 3.2 of the paper.
+
+2. Audio examples
 	* Audio examples to demonstrate each of the augmentation methods applied to a short clip of tabla audio.
-
-2. Code
-	* Python scripts with our implementations of different augmentation methods as described in Section 3.2 of the paper.
-	* A python script to detect and classify strokes in a given test audio of tabla playing, using the best trained 1-way models described in Section 3.1.2 of the paper.
-
 
 3. Dataset
 	* Audios and annotations prepared for this study will be released for research purposes (not uploaded here due to size constraints; link coming soon)
