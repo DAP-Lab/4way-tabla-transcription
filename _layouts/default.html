@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,maximum-scale=2">
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+
+{% seo %}
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <!--{% if site.github.is_project_page %}
+            <a id="forkme_banner" href="{{ site.github.repository_url }}">View on GitHub</a>
+          {% endif %}-->
+
+          <h1 id="project_title">4-way Classification of Tabla Strokes with Models Adapted from Automatic Drum Transcription</h1>
+          <h2 id="project_tagline">Supplementary audios</h2>
+
+          {% if site.show_downloads %}
+            <section id="downloads">
+              <a class="zip_download_link" href="{{ site.github.zip_url }}">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="{{ site.github.tar_url }}">Download this project as a tar.gz file</a>
+            </section>
+          {% endif %}
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <div id="contents_list" class="contents-list">
+          <!--<h2>Contents<h2>
+          <ul>
+            <li><a href="#ismir2020_video"><h3 style="color:blue">Video presentation at ISMIR 2020</h3></a>
+            <li><a href="#audio_example_tempi"><h3 style="color:blue">Example audio from a section in a concert</h3></a>
+            <li><a href="#stm_examples"><h3 style="color:blue">Examples of different surface tempo multiples</h3></a>
+            <li><a href="#dhrupad_playlist"><h3 style="color:blue">More Dhrupad music on YouTube</h3></a>
+            <li><a href="#model_variants"><h3 style="color:blue">Some other model architectures</h3></a>
+            <li><a href="#section_descriptions"><h3 style="color:blue">Musical description of the bandish sections</h3></a> -->
+            <!-- <li><a href="#choutal_theka_variants"><h3 style="color:blue">Changing rhythmic density within the theka</h3></a> -->
+            <!-- <li><a href="#tempo-cnn"><h3 style="color:blue">Related Work – <i>tempo-cnn</i></h3></a> -->
+            <!-- <li><a href="#stm-cnn"><h3 style="color:blue">Proposed Model for s.t.m. Estimation</h3></a> -->
+            <!-- <li><a href="#conf_mats"><h3 style="color:blue">Confusion matrices for s.t.m. prediction</h3></a> -->
+            </ul>
+        </div>
+        <br><br><br>
+
+        <div id="" class="section_content">
+          <h2 id="stroke_category_examples">Examples strokes from the 4 categories</h2>
+          <br>
+          <div class="row">
+            <div class="column">
+              <div class="row">
+              <img src="media/presentation_audios/tabla-strokes/ti_2_2_stft.png" style="width:100%">
+              <figure>
+              <audio src="media/presentation_audios/tabla-strokes/ti_2_2.wav" controls></audio>
+              <figcaption>(a) Damped</figcaption>
+              </figure>
+              </div>
+            </div>
+            <div class="column">
+              <div class="row">
+              <img src="media/presentation_audios/tabla-strokes/na_2_0_stft.png" style="width:100%">
+              <audio src="media/presentation_audios/tabla-strokes/na_2_0.wav" controls></audio>
+              <figcaption>(b) Resonant Treble</figcaption>
+              </figure>
+              </div>
+            </div>
+            <div class="column">
+              <div class="row">
+              <img src="media/presentation_audios/tabla-strokes/ghe_2_1_stft.png" style="width:100%">
+              <audio src="media/presentation_audios/tabla-strokes/ghe_2_1.wav" controls></audio>
+              <figcaption>(c) Resonant Bass</figcaption>
+              </figure>                
+              </div>
+            </div>
+            <div class="column">
+              <div class="row">
+              <img src="media/presentation_audios/tabla-strokes/dha_2_9_stft.png" style="width:100%">
+              <audio src="media/presentation_audios/tabla-strokes/dha_2_9.wav" controls></audio>
+              <figcaption>(d) Resonant Both</figcaption>
+              </figure>                
+              </div>
+            </div>            
+          </div>
+          <br>
+        </div>
+        <br>
+        <br><br><br>
+
+        <div id="" class="section_content">
+          <h2 id="drum_type_examples">Examples strokes from the 3 drum types</h2>
+          <br>
+          <div class="row">
+            <div class="column">
+              <div class="row">
+              <img src="media/presentation_audios/drum-strokes/HH.png" style="width:100%">
+              <figure>
+              <audio src="media/presentation_audios/drum-strokes/HH.wav" controls></audio>
+              <figcaption>(a) Hi-hat</figcaption>
+              </figure>
+              </div>
+            </div>
+            <div class="column">
+              <div class="row">
+              <img src="media/presentation_audios/drum-strokes/SD.png" style="width:100%">
+              <audio src="media/presentation_audios/drum-strokes/SD.wav" controls></audio>
+              <figcaption>(b) Snare drum</figcaption>
+              </figure>
+              </div>
+            </div>
+            <div class="column">
+              <div class="row">
+              <img src="media/presentation_audios/drum-strokes/KD.png" style="width:100%">
+              <audio src="media/presentation_audios/drum-strokes/KD.wav" controls></audio>
+              <figcaption>(c) Kick drum</figcaption>
+              </figure>                
+              </div>
+            </div>
+          </div>
+          <br>
+        </div>
+        <br>
+        <br><br><br>
+
+        <div id="" class="section_content">
+          <h2 id="data_aug_examples">Data Augmentation Examples</h2>
+          <br>
+          <div class="row">
+              <div class="row">
+              <img src="media/presentation_audios/data-aug/KB_11_stft.png" width=500, height=200>
+              <figure>
+              <audio src="media/presentation_audios/data-aug/KB_11.wav" controls></audio>
+              <figcaption>(a) Original</figcaption>
+              </figure>
+              </div>
+              <br><br>
+              <div class="row">
+              <img src="media/presentation_audios/data-aug/KB_11_ps_0.94_stft.png" width=500, height=200>
+              <figure>
+              <audio src="media/presentation_audios/data-aug/KB_11_ps_0.94.wav" controls></audio>
+              <figcaption>(b) Pitch shift (-1 semitone)</figcaption>
+              </figure>
+              </div>
+              <br><br>
+              <div class="row">
+              <img src="media/presentation_audios/data-aug/KB_11_ts_0.80_stft.png" width=500, height=200>
+              <figure>
+              <audio src="media/presentation_audios/data-aug/KB_11_ts_0.80.wav" controls></audio>
+              <figcaption>(c) Time scale (0.8)</figcaption>
+              </figure>                
+              </div>
+              <br><br>
+              <div class="row">
+              <img src="media/presentation_audios/data-aug/KB_11_ar_3.00_stft.png" width=500, height=200>
+              <figure>
+              <audio src="media/presentation_audios/data-aug/KB_11_ar_3.00.wav" controls></audio>
+              <figcaption>(d) Attack remix (scale perc. by 3)</figcaption>
+              </figure>                
+              </div>
+              <br><br>
+              <div class="row">
+              <img src="media/presentation_audios/data-aug/KB_11_ss-bass_4.00_stft.png" width=500, height=200>
+              <figure>
+              <audio src="media/presentation_audios/data-aug/KB_11_ss-bass_4.00.wav" controls></audio>
+              <figcaption>(e) Spectral filtering - bass (scale bass band by 4)</figcaption>
+              </figure>                
+              </div>
+              <br><br>
+              <div class="row">
+              <img src="media/presentation_audios/data-aug/KB_11_sr-bass_2.00_stft.png" width=500, height=200>
+              <figure>
+              <audio src="media/presentation_audios/data-aug/KB_11_sr-bass_2.00.wav" controls></audio>
+              <figcaption>(f) Stroke remixing - bass (scale separated bass stroke by 2)</figcaption>
+              </figure>                
+              </div>
+              <br><br>
+              <div class="row">
+              <img src="media/presentation_audios/data-aug/uthan_stft.png" width=500, height=300>
+              <figure>
+              <audio src="media/presentation_audios/data-aug/uthan.wav" controls></audio>
+              <figcaption>(h) Original (before bass modulation) </figcaption>
+              </figure>                
+              </div>
+              <br><br>
+              <div class="row">
+              <img src="media/presentation_audios/data-aug/uthan_bm_stft.png" width=500, height=300>
+              <figure>
+              <audio src="media/presentation_audios/data-aug/uthan_bm.wav" controls></audio>
+              <figcaption>(i) After bass modulation </figcaption>
+              </figure>                
+              </div>
+            </div>            
+          </div>
+          <br>
+        </div>
+
+
+
+        </div>
+
+
+      </section>
+    </div>
+      
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        {% if site.github.is_project_page %}
+        <p class="copyright">{{ site.title | default: site.github.repository_name }} maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></p>
+        {% endif %}
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    {% if site.google_analytics %}
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', '{{ site.google_analytics }}', 'auto');
+        ga('send', 'pageview');
+      </script>
+    {% endif %}
+  </body>
+</html>
