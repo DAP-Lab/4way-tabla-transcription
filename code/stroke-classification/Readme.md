@@ -1,5 +1,7 @@
-How to use:
+Requirements:  
+See [requirements.txt](requirements.txt)
 
+How to use:
 ```
 python3 transcribe.py --input <path/to/test/audio> --output <path/to/folder/to/save/output>
 ```
