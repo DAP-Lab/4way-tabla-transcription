@@ -60,11 +60,11 @@ fMax=8000
 nMels=80
 
 #cv-splits
-split_dir = '../cv_folds'
+split_dir = './cv_folds'
 splits=dict(zip(['fold0', 'fold1', 'fold2'], [np.loadtxt(os.path.join(split_dir, '3fold_cv_%d.fold'%fold), dtype=str) for fold in range(3)]))
 
 #main
-songlist=np.loadtxt('../songlists/songlist_%s.txt'%args.aug_method,dtype=str)
+songlist=np.loadtxt('./songlists/songlist_%s.txt'%args.aug_method,dtype=str)
 
 stroke_categories=['d','rt','rb','b']
 

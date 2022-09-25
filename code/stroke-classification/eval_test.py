@@ -44,7 +44,7 @@ elif args.stroke=='rt':
 else:   
 	from utils import onsetCNN
 
-songlist = np.loadtxt('../cv_folds/test.fold',dtype=str)
+songlist = np.loadtxt('./cv_folds/test.fold',dtype=str)
 
 #loop over test songs
 n_folds=3

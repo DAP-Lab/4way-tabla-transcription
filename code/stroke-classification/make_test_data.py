@@ -39,7 +39,7 @@ fMax=8000
 nMels=80
 
 #cv-splits
-split_dir = '../cv_folds'
+split_dir = './cv_folds'
 songlist = np.loadtxt(os.path.join(split_dir, 'test.fold'), dtype=str)
 
 #main

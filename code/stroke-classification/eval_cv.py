@@ -45,7 +45,7 @@ use_cuda = torch.cuda.is_available()
 device = torch.device("cuda:%d"%args.gpu_id if use_cuda else "cpu")
 
 path_to_saved_model = os.path.join(args.saved_model_path, args.stroke, 'expt_%d'%args.expt_no, 'saved_model_%d.pt'%args.fold)
-songlist = np.loadtxt('../cv_folds/3fold_cv_%d.fold'%args.fold,dtype=str)
+songlist = np.loadtxt('./cv_folds/3fold_cv_%d.fold'%args.fold,dtype=str)
 
 #load model
 model = onsetCNN().double().to(device)

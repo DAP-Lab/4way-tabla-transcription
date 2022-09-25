@@ -105,7 +105,7 @@ if __name__ == "__main__" :
 	train_val_data_filepaths = {'train':os.path.join(args.datapath, 'labels_weights_train_%s.hdf5'%args.aug_method), 'validation':os.path.join(args.datapath, 'labels_weights_val_%s.hdf5'%args.aug_method)} 	# these are temp files that will be created and overwritten during every training run; they contain the frame-wise onset labels for a given stroke and weights to be applied during loss computation 
 
 	#get list of audios in each CV fold
-	split_dir = '../cv_folds'
+	split_dir = './cv_folds'
 	folds = {'val': args.fold, 'train': np.delete([0,1,2], args.fold)}
 	splits = dict(zip([0, 1, 2], [np.loadtxt(os.path.join(split_dir, '3fold_cv_%d.fold'%fold), dtype=str) for fold in range(3)]))
 
@@ -115,8 +115,8 @@ if __name__ == "__main__" :
 	utils.make_train_val_split(folds, labels_weights_orig_filepath, labels_weights_aug_filepath, train_val_data_filepaths)
 
 	#load all melgram-label pairs as a dict to memory for faster training (ensure sufficient RAM size apriori)
-	songlist_orig = np.loadtxt('../songlists/songlist_orig.txt', dtype=str)
-	songlist_aug = np.loadtxt('../songlists/songlist_%s.txt'%args.aug_method, dtype=str)
+	songlist_orig = np.loadtxt('./songlists/songlist_orig.txt', dtype=str)
+	songlist_aug = np.loadtxt('./songlists/songlist_%s.txt'%args.aug_method, dtype=str)
 	mel_data = utils.load_mel_data(args.datapath, folds, splits, songlist_orig, songlist_aug)
 
 	#data loaders
