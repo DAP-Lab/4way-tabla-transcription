@@ -16,3 +16,5 @@ The output transcription is a 2-column text file containing detected onset locat
 ```
 --threshold <value> --gpu_id <ID>
 ```
+
+* See Train_readme for instructions on reproducing the train-eval experiments of the paper.
