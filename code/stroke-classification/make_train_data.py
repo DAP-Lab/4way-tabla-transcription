@@ -40,7 +40,7 @@ if not os.path.exists(save_dir):
 	os.makedirs(save_dir)
 
 #data stats for normalization
-stats=np.load('../means_stds.npy')
+stats=np.load('./means_stds.npy')
 means=stats[0]
 stds=stats[1]
 
