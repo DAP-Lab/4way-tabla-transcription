@@ -17,7 +17,7 @@ Contents:
 	* Audio examples to demonstrate each of the augmentation methods applied to a short clip of tabla audio.
 
 3. Dataset
-	* Audios and annotations prepared for this study will be released for research purposes (not uploaded here due to size constraints; link coming soon)
+	* The dataset can be downloaded here - https://zenodo.org/record/7110248#.Y93jzdLMLDQ
 	
 
 4. Additional experimental details & results
