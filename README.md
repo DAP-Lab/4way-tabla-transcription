@@ -1,6 +1,6 @@
 # 4way-tabla-transcription
 
-This respository contains models and code to perform four-way classification of tabla strokes in a supplied audio recording into the following categories: Damped, Resonant treble, Resonant bass, Resonant both. It is meant to accompany the following papers: 
+This respository contains models and code to perform four-way classification of tabla strokes in an audio recording into the following categories: Damped, Resonant treble, Resonant bass, Resonant both. It is meant to accompany the following papers: 
 
 ```
 R. M. Ananthanarayana, A. Bhattacharjee, and P. Rao, “Four-way Classification of Tabla Strokes
