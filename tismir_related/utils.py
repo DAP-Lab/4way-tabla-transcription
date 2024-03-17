@@ -7,9 +7,7 @@ import mir_eval
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.utils import data
-import h5py as h5
 from collections import OrderedDict
-
 
 #model
 class onsetCNN_RB(nn.Module):
@@ -154,91 +152,6 @@ class onsetCNN_RT(nn.Module):
 
 		return y
 #################################
-
-class Dataset_semi_hdf5(data.Dataset):
-  'Characterizes a dataset for PyTorch'
-  def __init__(self, filepath, seq_length=15, n_channels=3, subset_frac=None, specgram_data=None):
-        'Initialization'
-        self.filepath = filepath
-        self.seq_length = seq_length
-        self.n_channels = n_channels
-        self.subset_frac = subset_frac
-        self.hf = h5.File(self.filepath, 'r')
-        self.labels_weights = self.hf['data'][:]
-        self.X_all = specgram_data
-
-  def __len__(self):
-        'Denotes the total number of samples'
-        return int(np.floor(self.subset_frac*self.labels_weights.shape[0]))
-
-  def __getitem__(self, index):
-        'Generates one sample of data'
-        # Load data and get label
-        row = self.labels_weights[index]
-        start = int(row[1])
-        song = row[0].decode()+'.hdf5'
-        
-        if self.n_channels==3:
-            X = torch.tensor(self.X_all[song][:,:,start:start+self.seq_length], dtype=torch.float32)
-        elif self.n_channels==1:
-            X = torch.tensor(self.X_all[song][1:2,:,start:start+self.seq_length], dtype=torch.float32) ## changed to include only middle channel
-
-        y = torch.tensor(float(row[2]), dtype=torch.float32)
-
-        w = torch.tensor(float(row[3]), dtype=torch.float32)
-
-        return X, y, w
-
-def make_train_val_split_data(folds, labels_weights_orig_filepath, labels_weights_aug_filepath, train_val_data_filepaths,):
-        for key in train_val_data_filepaths:
-                if os.path.exists(train_val_data_filepaths[key]):
-                        os.system('rm %s'%train_val_data_filepaths[key])
-
-        with h5.File(labels_weights_orig_filepath, 'r') as hf_data:
-                with h5.File(train_val_data_filepaths['validation'], 'w') as hf_fold:
-                        hf_fold.create_dataset('data', data=hf_data['fold%d/data'%folds['val']])
-
-        with h5.File(labels_weights_aug_filepath, 'r') as hf_data:
-                with h5.File(train_val_data_filepaths['train'], 'a') as hf_fold:
-                        for fold in folds['train']:
-                                if 'data' not in hf_fold:
-                                        hf_fold.create_dataset('data', data=hf_data['fold%d/data'%fold], maxshape=(None,None))
-                                else:
-                                        hf_fold['data'].resize((hf_fold['data'].shape[0] + hf_data['fold%d/data'%fold].shape[0]), axis = 0)
-                                        hf_fold['data'][-hf_data['fold%d/data'%fold].shape[0]:] = hf_data['fold%d/data'%fold]
-        return
-
-def make_train_val_split_data_train_val(folds, labels_weights_orig_filepath, labels_weights_aug_filepath, train_val_data_filepaths,):
-        for key in train_val_data_filepaths:
-                if os.path.exists(train_val_data_filepaths[key]):
-                        os.system('rm %s'%train_val_data_filepaths[key])
-
-        with h5.File(labels_weights_orig_filepath, 'r') as hf_data:
-                with h5.File(train_val_data_filepaths['validation'], 'w') as hf_fold:
-                        hf_fold.create_dataset('data', data=hf_data['%s/data'%folds['val']])
-
-        with h5.File(labels_weights_aug_filepath, 'r') as hf_data:
-                with h5.File(train_val_data_filepaths['train'], 'a') as hf_fold:
-                        for fold in folds['train']:
-                                if 'data' not in hf_fold:
-                                        hf_fold.create_dataset('data', data=hf_data['%s/data'%fold], maxshape=(None,None))
-                                else:
-                                        hf_fold['data'].resize((hf_fold['data'].shape[0] + hf_data['%s/data'%fold].shape[0]), axis = 0)
-                                        hf_fold['data'][-hf_data['%s/data'%fold].shape[0]:] = hf_data['%s/data'%fold]
-        return
-
-def get_train_val_split_filenames(train_val_folds, cv_split_filenames, songlist_orig, songlist_aug, aug_method):
-        train_val_filenames=[]
-
-        #val files
-        train_val_filenames+=list(cv_split_filenames[train_val_folds['val']])
-
-        #train files
-        for fold in train_val_folds['train']:
-                for song in cv_split_filenames[fold]:
-                        train_val_filenames+=[item for item in songlist_aug if song in item] #((song==item) | ('%s_%s_'%(song, aug_method) in item))]
-
-        return train_val_filenames
 
 #peak-picking function
 def peakPicker(data, peakThresh):
